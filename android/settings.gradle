@@ -1,0 +1,3 @@
+rootProject.name = 'imgur_react'
+
+include ':app'
