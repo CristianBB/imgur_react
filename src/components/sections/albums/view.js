@@ -65,11 +65,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchAlbums: () => {
-            dispatch(AlbumsActions.fetchAlbums())
+            dispatch(AlbumsActions.fetchAlbums());
         },
         onAlbumTapped: (album) => {
-            dispatch(AlbumsActions.setItem(album))
-            Actions.images({ title: album.title })
+            dispatch(AlbumsActions.setItem(album));
+            Actions.images({ title: album.title });
         }
     }
 };

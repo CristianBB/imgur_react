@@ -15,7 +15,7 @@ class Images extends Component {
     _renderItem(item, index) {
         return <ImageCell
             image={item}
-            onImagePress={this.props.onImageTapped()}
+            onImagePress={v => this.props.onImageTapped(v)}
         />
     }
 
@@ -28,7 +28,6 @@ class Images extends Component {
                     data={list}
                     renderItem={({ item, index}) => this._renderItem(item, index) }
                     keyExtractor={(item, i) => 'image' + item.id}
-                    onRefresh={ () => this.props.fetchAlbumImages()}
                     refreshing={this.props.isFetching}
                 />
             </View>
@@ -49,8 +48,8 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(ImagesActions.fetchAlbumImages())
         },
         onImageTapped: (image) => {
-            dispatch(ImagesActions.setItem(image))
-            // Actions.characterDetail({ title: character.nombre })
+            dispatch(ImagesActions.setItem(image));
+            Actions.imageDetail({ title: image.title || 'No Title' });
         }
     }
 };
