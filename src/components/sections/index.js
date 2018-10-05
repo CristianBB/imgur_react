@@ -1,2 +1,4 @@
 import Albums from './albums/'
-export { Albums }
+import Images from './images/'
+
+export { Albums, Images }

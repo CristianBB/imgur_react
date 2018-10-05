@@ -69,7 +69,7 @@ export function fetchAlbums() {
             .catch( err => {
                 if (err.response && status )
                 dispatch(setFetching(false));
-                console.log("fetchHousesList error: ", err)
+                console.log("fetchAlbums error: ", err)
             })
 
     }

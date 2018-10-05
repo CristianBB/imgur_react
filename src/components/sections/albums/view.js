@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, ActivityIndicator} from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import styles from './styles'
 import { AlbumCell  } from '../../widgets/'
 import { connect } from 'react-redux'
@@ -11,8 +12,8 @@ class Albums extends Component {
         this.props.fetchAlbums()
     }
 
-    _onAlbumTapped(house) {
-
+    _onAlbumTapped(album) {
+        this.props.onAlbumTapped(album);
     }
 
     _renderItem({ item }) {
@@ -65,6 +66,10 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchAlbums: () => {
             dispatch(AlbumsActions.fetchAlbums())
+        },
+        onAlbumTapped: (album) => {
+            dispatch(AlbumsActions.setItem(album))
+            Actions.images({ title: album.title })
         }
     }
 };

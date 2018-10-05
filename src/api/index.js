@@ -65,6 +65,11 @@ export function fetchAlbums() {
     })
 }
 
+export function fetchAlbumImages(albumHash) {
+    const url = `https://api.imgur.com/3/album/${albumHash}/images`;
+    return axios.get(url);
+}
+
 export function getImage(imageHash) {
     const url = `/3/image/${imageHash}`;
     return axios.get(url);
