@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, ActivityIndicator} from 'react-native'
+import { View, FlatList, ActivityIndicator, Text} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import styles from './styles'
 import commonStyles from '../../../commons/styles';
@@ -38,6 +38,16 @@ class Albums extends Component {
             </View>
         )
     }
+    _renderNoAlbums() {
+        if(this.props.isFetching || this.props.list.length !== 0) {
+            return null
+        }
+        return (
+            <View style={styles.noAlbumContainer}>
+                <Text style={styles.label}>¡ Aún no existe ningún Álbum !</Text>
+            </View>
+        )
+    }
 
     render() {
         return (
@@ -51,6 +61,9 @@ class Albums extends Component {
                     extraData={this.props}
                     numColumns={2}
                 />
+
+                { this._renderNoAlbums() }
+
                 <ActionButton
                     buttonColor={colors.floatingButton}
                     onPress={() => Actions.editAlbum({isEdit: false, title: 'Nuevo Álbum'})}

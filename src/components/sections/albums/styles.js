@@ -9,5 +9,20 @@ export default StyleSheet.create({
     flatListContainer: {
         paddingTop: 40,
         borderRadius: 20,
+    },
+    noAlbumContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
+    label: {
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: colors.primaryText,
     }
 })

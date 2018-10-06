@@ -1,7 +1,6 @@
 import React from 'react'
-import {View, Text, Image, Animated} from 'react-native'
+import {View, Text, Image, Animated, ScrollView} from 'react-native'
 import styles from './styles'
-import commonStyles from '../../../commons/styles';
 import { connect } from 'react-redux'
 import * as ImagesActions from "../../../redux/images/actions";
 import Dialog from "react-native-dialog";
@@ -52,7 +51,9 @@ class ImageDetail extends React.Component {
 
                 <View style={styles.dataContainer}>
                     <Text style={styles.titleLabel}>{'Descripción'}</Text>
-                    <Text style={styles.descriptionLabel}>{description}</Text>
+                    <ScrollView>
+                        <Text style={styles.descriptionLabel}>{description}</Text>
+                    </ScrollView>
                 </View>
 
                 <View style={styles.buttonContainer}>

@@ -30,7 +30,6 @@ export default StyleSheet.create({
     buttonContainer: {
         flex:1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 20
+        justifyContent: 'center'
     }
 })

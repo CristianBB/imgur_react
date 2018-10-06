@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Image, Alert, ActivityIndicator, Animated}
 import { Button, TextInput } from '../../widgets/'
 import styles from './styles'
 import commonStyles from '../../../commons/styles'
-import colors from '../../../commons/colors'
+import * as colors from '../../../commons/colors'
 import ImagePicker from 'react-native-image-picker'
 import { connect } from 'react-redux'
 import * as AlbumsActions from '../../../redux/albums/actions'
