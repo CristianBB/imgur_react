@@ -5,6 +5,7 @@ import styles from './styles'
 import { AlbumCell  } from '../../widgets/'
 import { connect } from 'react-redux'
 import * as AlbumsActions from '../../../redux/albums/actions'
+import ActionButton from 'react-native-action-button';
 
 class Albums extends Component {
 
@@ -47,6 +48,10 @@ class Albums extends Component {
                     extraData={this.props}
                     numColumns={2}
                     style={{paddingTop: 40}}
+                />
+                <ActionButton
+                    buttonColor="rgba(231,76,60,1)"
+                    onPress={() => Actions.editAlbum({isEdit: false})}
                 />
 
                 { this._renderActivityIndicator() }

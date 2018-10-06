@@ -81,7 +81,7 @@ export function updateAlbum(data) {
 
         api.postImage(data.image, data.id, 'cover_image.png', 'Cover Image', null)
             .then(res => {
-                return api.updateAlbum(data.id, data.title, data.description, res ? res.data.data.id : null);
+                return api.updateAlbum(data.id, data.title, '', res ? res.data.data.id : null);
             })
             .then(res => {
                 dispatch(setFetching(false));
@@ -91,6 +91,27 @@ export function updateAlbum(data) {
             .catch( err => {
                 dispatch(setFetching(false));
                 console.log("updateAlbum error: ", err)
+            })
+    }
+}
+
+export function createAlbum(data) {
+    return (dispatch, getState, api) => {
+
+        dispatch(setFetching(true));
+
+        api.postImage(data.image, data.id, 'cover_image.png', 'Cover Image', null)
+            .then(res => {
+                return api.createAlbum(data.title, '', res ? res.data.data.id : null);
+            })
+            .then(res => {
+                dispatch(setFetching(false));
+                dispatch(fetchAlbums());
+                Actions.popTo('albums');
+            })
+            .catch(err => {
+                dispatch(setFetching(false));
+                console.log("createAlbum error: ", err)
             })
     }
 }

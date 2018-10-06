@@ -93,7 +93,7 @@ export function postImage(image, albumHash, name, title, description ) {
 }
 
 export function updateAlbum(albumHash, title, description, coverHash) {
-    const url = `3/album/${albumHash}`;
+    const url = `/3/album/${albumHash}`;
 
     const data = {};
     if (title) data.title = title;
@@ -101,4 +101,16 @@ export function updateAlbum(albumHash, title, description, coverHash) {
     if (coverHash) data.cover = coverHash;
 
     return axios.put(url, data);
+}
+
+export function createAlbum(title, description, coverHash) {
+    const url = '/3/album';
+
+    const data = {
+        title: title,
+        description: description,
+        cover: coverHash,
+    };
+
+    return axios.post(url, data);
 }

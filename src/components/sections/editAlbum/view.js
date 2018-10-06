@@ -102,7 +102,6 @@ class EditAlbum extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Prueba </Text>
 
                 <View style={{paddingTop: 40, padding: 20}}>
                     { this._renderTextInput('Título del Album: *', 'title', 'My Album') }
@@ -135,7 +134,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onNewAlbum: (data) => {
-            // dispatch(AlbumsActions.postHouseCharacter(data))
+            dispatch(AlbumsActions.createAlbum(data))
         },
         onEditAlbum: (data) => {
             dispatch(AlbumsActions.updateAlbum(data))
