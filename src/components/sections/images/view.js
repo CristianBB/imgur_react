@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
 import styles from './styles'
+import commonStyles from '../../../commons/styles'
+import * as colors from '../../../commons/colors'
 import { connect } from 'react-redux'
 import * as ImagesActions from '../../../redux/images/actions'
 import { ImageCell } from '../../widgets/'
@@ -25,14 +27,14 @@ class Images extends Component {
             return null
         }
         return (
-            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
-                <ActivityIndicator size={'large'} color={'white'} animating={true} />
+            <View style={commonStyles.activityIndicator}>
+                <ActivityIndicator size={'large'} color={colors.activityIndicator} animating={true} />
             </View>
         )
     }
 
     render() {
-        const { list, isFetching } = this.props;
+        const { list } = this.props;
 
         return (
             <View style={styles.container}>
@@ -43,7 +45,7 @@ class Images extends Component {
                     refreshing={this.props.isFetching}
                 />
                 <ActionButton
-                    buttonColor="rgba(231,76,60,1)"
+                    buttonColor={colors.floatingButton}
                     onPress={() => Actions.newImage()}
                 />
 

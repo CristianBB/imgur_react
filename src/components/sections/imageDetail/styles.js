@@ -1,19 +1,25 @@
-import { StyleSheet } from 'react-native' 
+import { StyleSheet } from 'react-native'
+import * as colors from '../../../commons/colors'
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(24,24,24)'
+        backgroundColor: colors.mainBackground
     },
     image: {
         width: '100%',
-        height: 200
+        height: 200,
+        flex: 2,
     },
     dataContainer: {
+        flex: 1,
         padding: 20,
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
-    text: {
-        color: 'white',
+    titleLabel: {
+        color: colors.primaryText,
+    },
+    inputLabel: {
+        color: colors.secondaryText,
     },
 })

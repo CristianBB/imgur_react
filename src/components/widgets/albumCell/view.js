@@ -18,13 +18,13 @@ export default class extends Component {
                 onPress={ () => this.props.onAlbumPress(album) }
                 style={styles.cellContainer}>
 
-                <View style={{ justifyContent: 'center', height: '10%'}}>
-                    <Text style={{color: 'white', fontSize: 22}} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleLabel} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
                 </View>
 
                <Image
                     source={image}
-                    style={{ height: '90%'}}
+                    style={styles.image}
                     resizeMode={'cover'}
                 />
             </TouchableOpacity>

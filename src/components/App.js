@@ -3,6 +3,7 @@ import { StatusBar, TouchableOpacity, Text } from 'react-native';
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
 import {Albums, Images, ImageDetail, EditAlbum, NewImage} from "./sections/";
 import * as api from '../api/'
+import * as colors from '../commons/colors';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
@@ -16,15 +17,15 @@ const store = createStore(
 );
 
 const sceneDefaultStyles = {
-    navigationBarStyle: { backgroundColor: 'rgb(24,24,24)'},
-    backButtonTintColor: 'white',
-    backButtonTextStyle: { color: 'white' },
-    titleStyle: { color: 'white' },
+    navigationBarStyle: { backgroundColor: colors.navigationBar},
+    backButtonTintColor: colors.primaryText,
+    backButtonTextStyle: { color: colors.primaryText },
+    titleStyle: { color: colors.primaryText },
 };
 
 const editAlbumButton = props => (
     <TouchableOpacity style={{padding: 10}} onPress={ () => Actions.editAlbum({isEdit: true}) }>
-        <Text style={{color: 'red', fontWeight: 'bold'}}>{'Editar'}</Text>
+        <Text style={{color: colors.buttonText, fontWeight: 'bold'}}>{'Editar'}</Text>
     </TouchableOpacity>
 );
 

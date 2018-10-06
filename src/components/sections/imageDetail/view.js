@@ -58,8 +58,8 @@ class ImageDetail extends React.Component {
                 <Image source={imageLink} resizeMode={'cover'} style={[styles.image]}/>
 
                 <View style={styles.dataContainer}>
-                    <Text style={styles.text}>{'Descripción: '}</Text>
-                    <Text style={styles.text}>{description}</Text>
+                    <Text style={styles.titleLabel}>{'Descripción: '}</Text>
+                    <Text style={styles.inputLabel}>{description}</Text>
                 </View>
 
                 <View style={{paddingHorizontal: 20, paddingBottom: 20}}>

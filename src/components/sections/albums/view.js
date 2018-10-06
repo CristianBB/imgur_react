@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, FlatList, ActivityIndicator} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import styles from './styles'
+import commonStyles from '../../../commons/styles';
+import * as colors from '../../../commons/colors';
 import { AlbumCell  } from '../../widgets/'
 import { connect } from 'react-redux'
 import * as AlbumsActions from '../../../redux/albums/actions'
@@ -31,8 +33,8 @@ class Albums extends Component {
             return null
         }
         return (
-            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
-                <ActivityIndicator size={'large'} color={'white'} animating={true} />
+            <View style={commonStyles.activityIndicator}>
+                <ActivityIndicator size={'large'} color={colors.activityIndicator} animating={true} />
             </View>
         )
     }
@@ -47,10 +49,10 @@ class Albums extends Component {
                     keyExtractor={ (item, i) => 'cell' + item.id }
                     extraData={this.props}
                     numColumns={2}
-                    style={{paddingTop: 40}}
+                    style={styles.flatList}
                 />
                 <ActionButton
-                    buttonColor="rgba(231,76,60,1)"
+                    buttonColor={colors.floatingButton}
                     onPress={() => Actions.editAlbum({isEdit: false})}
                 />
 

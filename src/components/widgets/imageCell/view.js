@@ -21,7 +21,7 @@ export default class extends Component {
 
                 <Image source={imageLink} style={styles.image} resizeMode={'cover'}/>
                 <View style={styles.detailContainer}>
-                    <Text style={[styles.label, styles.title]}>{title}</Text>
+                    <Text style={styles.title} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
                 </View>
             </TouchableOpacity>
         )

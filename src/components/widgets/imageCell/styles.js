@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import * as colors from '../../../commons/colors'
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: 'rgb(50,50,50)',
+        backgroundColor: colors.mainBackground,
         marginVertical: 1
     },
     image: {
@@ -10,14 +11,13 @@ export default StyleSheet.create({
         height: 200,
     },
     detailContainer: {
+        backgroundColor: colors.sectionContainer,
         flexDirection: 'row',
         padding: 20,
-    },
-    label: {
-        color: 'white',
     },
     title: {
         fontWeight: 'bold',
         flex: 1,
+        color: colors.primaryText,
     }
 })
