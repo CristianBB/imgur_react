@@ -4,22 +4,33 @@ import * as colors from '../../../commons/colors'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.mainBackground
+        backgroundColor: colors.mainBackground,
+        padding: 10,
     },
     image: {
         width: '100%',
-        height: 200,
-        flex: 2,
+        borderRadius: 20,
+        flex: 4,
     },
     dataContainer: {
         flex: 1,
-        padding: 20,
+        padding: 10,
         flexDirection: 'column'
     },
     titleLabel: {
         color: colors.primaryText,
+        fontWeight: 'bold',
+        fontSize: 16,
     },
-    inputLabel: {
+    descriptionLabel: {
+        paddingTop: 5,
         color: colors.secondaryText,
+        fontSize: 15,
     },
+    buttonContainer: {
+        flex:1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 20
+    }
 })

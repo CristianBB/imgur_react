@@ -3,24 +3,25 @@ import * as colors from '../../../commons/colors';
 
 export default StyleSheet.create({
     cellContainer: {
-        width: '50%',
-        height: 300,
-        backgroundColor: 'rgb(173,126,255)',
-        paddingHorizontal: 4,
-        paddingVertical: 2,
+        width: '47%',
+        backgroundColor: colors.mainBackground,
+        margin: 5,
         borderRadius: 10,
-        marginRight: 2
+    },
+    albumContainer: {
+        borderRadius: 10,
+        overflow: 'hidden',
     },
     titleContainer: {
-        justifyContent: 'center',
-        height: '10%',
+        backgroundColor: colors.sectionContainer,
+        padding: 10,
     },
     titleLabel: {
         color: colors.primaryText,
-        fontSize: 22
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     image: {
-        height: '90%',
-        borderRadius: 10,
+        height: 200,
     }
 })

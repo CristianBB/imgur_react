@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {View, Text, TouchableOpacity, Image, Alert, ActivityIndicator, Animated} from 'react-native'
 import { Button, TextInput } from '../../widgets/'
 import styles from './styles'
+import commonStyles from '../../../commons/styles'
+import colors from '../../../commons/colors'
 import ImagePicker from 'react-native-image-picker'
 import { connect } from 'react-redux'
 import * as AlbumsActions from '../../../redux/albums/actions'
@@ -106,8 +108,8 @@ class EditAlbum extends Component {
         const imageUri = this.state.image && this.state.image.preview && this.state.image.preview.uri ? this.state.image.preview : require('../../../resources/placeholder.png');
         const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen *';
         return (
-            <View style={{marginTop: 20}}>
-                <TouchableOpacity style={styles.imageContainer} onPress={() => this._onImagePickerTapped()}>
+            <View>
+                <TouchableOpacity style={styles.imagePicker} onPress={() => this._onImagePickerTapped()}>
                     <Image source={imageUri} style={styles.image} resizeMode={'cover'} />
                     <Text style={styles.imageText}>{imageLabel}</Text>
                 </TouchableOpacity>
@@ -119,12 +121,11 @@ class EditAlbum extends Component {
         if (!this.props.isEdit) return;
 
         return (
-            <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
-                <Button
-                    label={'Eliminar'.toUpperCase()}
-                    onPress={() => this._showDeleteDialog()}
-                />
-            </View>
+            <Button
+                label={'Eliminar'.toUpperCase()}
+                onPress={() => this._showDeleteDialog()}
+                isPrimaryButton={false}
+            />
         )
     }
 
@@ -147,8 +148,8 @@ class EditAlbum extends Component {
             return null
         }
         return (
-            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
-                <ActivityIndicator size={'large'} color={'white'} animating={true} />
+            <View style={commonStyles.activityIndicator}>
+                <ActivityIndicator size={'large'} color={colors.activityIndicator} animating={true} />
             </View>
         )
     }
@@ -157,22 +158,24 @@ class EditAlbum extends Component {
         return (
             <Animated.View style={[styles.container, {opacity: this.state.animatedOpacity}]}>
 
-                <View style={{paddingTop: 40, padding: 20}}>
-                    { this._renderTextInput('Título del Album: *', 'title', 'My Album') }
+                <View style={styles.titleContainer}>
+                    { this._renderTextInput('Título del Album *', 'title', 'My Album') }
                 </View>
 
-                <View style={{ paddingHorizontal: 20, paddingBottom: 40}}>
+                <View style={styles.imageContainer}>
                     { this._renderImageInput() }
                 </View>
 
-                <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
+                <View style={styles.buttonContainer}>
                     <Button
                         label={'Guardar'.toUpperCase()}
                         onPress={() => this._onSubmit()}
+                        isPrimaryButton={true}
                     />
+
+                    { this._renderDeleteImage() }
                 </View>
 
-                { this._renderDeleteImage() }
                 { this._renderActivityIndicator() }
 
                 <Dialog.Container visible={this.state.deleteDialogVisible}>

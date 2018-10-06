@@ -44,16 +44,16 @@ class Albums extends Component {
             <View style={styles.container}>
 
                 <FlatList
+                    style={styles.flatListContainer}
                     data={this.props.list}
                     renderItem={ value => this._renderItem(value) }
                     keyExtractor={ (item, i) => 'cell' + item.id }
                     extraData={this.props}
                     numColumns={2}
-                    style={styles.flatList}
                 />
                 <ActionButton
                     buttonColor={colors.floatingButton}
-                    onPress={() => Actions.editAlbum({isEdit: false})}
+                    onPress={() => Actions.editAlbum({isEdit: false, title: 'Nuevo Álbum'})}
                 />
 
                 { this._renderActivityIndicator() }

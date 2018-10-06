@@ -15,18 +15,17 @@ export default class extends Component {
         const title = album.title || 'No Title';
         return (
             <TouchableOpacity
-                onPress={ () => this.props.onAlbumPress(album) }
-                style={styles.cellContainer}>
+                style={styles.cellContainer}
+                onPress={ () => this.props.onAlbumPress(album) }>
 
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleLabel} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
+                <View style={styles.albumContainer}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.titleLabel} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
+                    </View>
+
+                    <Image source={image} style={styles.image} resizeMode={'cover'}/>
                 </View>
 
-               <Image
-                    source={image}
-                    style={styles.image}
-                    resizeMode={'cover'}
-                />
             </TouchableOpacity>
         )
     }

@@ -2,11 +2,13 @@ import React, {Component} from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import Spinner from 'react-native-spinkit'
 import styles from './styles'
+import * as colors from '../../../commons/colors'
 
 export default class extends Component {
 
     static defaultProps = {
         label: 'Guardar',
+        isPrimaryButton: true,
         onPress: () => {},
         isFetching: false,
     };
@@ -19,7 +21,7 @@ export default class extends Component {
 
     _renderContent() {
         if(this.props.isFetching) {
-            return <Spinner color={'#FFF'} size={20} type={'ChasingDots'} />
+            return <Spinner color={colors.activityIndicator} size={20} type={'ChasingDots'} />
         } else {
             return <Text style={styles.buttonText}>{this.props.label}</Text>
         }
@@ -28,7 +30,7 @@ export default class extends Component {
     render() {
         return (
             <TouchableOpacity 
-                style={styles.buttonContainer}
+                style={[styles.buttonContainer, {backgroundColor: this.props.isPrimaryButton ? colors.primaryButton : colors.secondaryButton}]}
                 onPress={ () => this._onPress() }
                 activeOpacity={ this.props.isFetching ? 1 : 0.2 }
             >

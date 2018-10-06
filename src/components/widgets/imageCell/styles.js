@@ -4,7 +4,12 @@ import * as colors from '../../../commons/colors'
 export default StyleSheet.create({
     container: {
         backgroundColor: colors.mainBackground,
-        marginVertical: 1
+        marginBottom: 10,
+        borderRadius: 20,
+    },
+    imageContainer: {
+        borderRadius: 20,
+        overflow: 'hidden',
     },
     image: {
         width: '100%',
@@ -12,7 +17,6 @@ export default StyleSheet.create({
     },
     detailContainer: {
         backgroundColor: colors.sectionContainer,
-        flexDirection: 'row',
         padding: 20,
     },
     title: {

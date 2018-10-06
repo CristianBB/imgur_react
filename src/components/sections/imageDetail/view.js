@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-    View,
-    Text,
-    Image,
-    Animated,
-    TouchableOpacity,
-    Dimensions,
-    ActivityIndicator
-} from 'react-native'
+import {View, Text, Image, Animated} from 'react-native'
 import styles from './styles'
+import commonStyles from '../../../commons/styles';
 import { connect } from 'react-redux'
 import * as ImagesActions from "../../../redux/images/actions";
 import Dialog from "react-native-dialog";
@@ -58,11 +51,11 @@ class ImageDetail extends React.Component {
                 <Image source={imageLink} resizeMode={'cover'} style={[styles.image]}/>
 
                 <View style={styles.dataContainer}>
-                    <Text style={styles.titleLabel}>{'Descripción: '}</Text>
-                    <Text style={styles.inputLabel}>{description}</Text>
+                    <Text style={styles.titleLabel}>{'Descripción'}</Text>
+                    <Text style={styles.descriptionLabel}>{description}</Text>
                 </View>
 
-                <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
+                <View style={styles.buttonContainer}>
                     <Button
                         label={'Eliminar'.toUpperCase()}
                         onPress={() => this._showDeleteDialog()}

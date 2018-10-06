@@ -10,5 +10,8 @@ export default StyleSheet.create({
         bottom: 0,
         right: 0,
     },
+    button: {
+        backgroundColor: 'rgb(42,0,114)'
+    },
 
 })

@@ -6,7 +6,8 @@ export default StyleSheet.create({
         flex: 1, 
         backgroundColor: colors.mainBackground,
     },
-    flatList: {
+    flatListContainer: {
         paddingTop: 40,
+        borderRadius: 20,
     }
 })

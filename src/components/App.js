@@ -24,7 +24,7 @@ const sceneDefaultStyles = {
 };
 
 const editAlbumButton = props => (
-    <TouchableOpacity style={{padding: 10}} onPress={ () => Actions.editAlbum({isEdit: true}) }>
+    <TouchableOpacity style={{padding: 10}} onPress={ () => Actions.editAlbum({isEdit: true, title: 'Editar Álbum'}) }>
         <Text style={{color: colors.buttonText, fontWeight: 'bold'}}>{'Editar'}</Text>
     </TouchableOpacity>
 );

@@ -77,7 +77,7 @@ class NewImage extends Component {
         const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen *';
         return (
             <View style={{marginTop: 20}}>
-                <TouchableOpacity style={styles.imageContainer} onPress={() => this._onImagePickerTapped()}>
+                <TouchableOpacity style={styles.imagePicker} onPress={() => this._onImagePickerTapped()}>
                     <Image source={imageUri} style={styles.image} resizeMode={'cover'} />
                     <Text style={styles.imageText}>{imageLabel}</Text>
                 </TouchableOpacity>
@@ -88,20 +88,19 @@ class NewImage extends Component {
     render() {
         return (
             <View style={styles.container}>
-
-                <View style={{paddingTop: 40, padding: 20}}>
-                    { this._renderTextInput('Título de la Imagen: *', 'title', 'Titulo de la Imagen') }
+                <View style={styles.titleContainer}>
+                    { this._renderTextInput('Título de la Imagen *', 'title', 'Titulo de la Imagen') }
                 </View>
 
-                <View style={{ paddingHorizontal: 20, paddingBottom: 40}}>
+                <View style={styles.imageContainer}>
                     { this._renderImageInput() }
                 </View>
 
-                <View style={{paddingTop: 40, padding: 20}}>
-                    { this._renderTextInput('Descripción de la Imagen: *', 'description', 'Descripción') }
+                <View style={styles.descriptionContainer}>
+                    { this._renderTextInput('Descripción de la Imagen *', 'description', 'Descripción') }
                 </View>
 
-                <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
+                <View style={styles.buttonContainer}>
                     <Button
                         label={'Guardar'.toUpperCase()}
                         onPress={() => this._onSubmit()}

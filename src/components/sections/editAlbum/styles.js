@@ -5,11 +5,11 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.mainBackground,
+        padding: 20,
     },
-    imageContainer: {
+    imagePicker: {
         borderWidth: 1,
         borderRadius: 20,
-        height: 200,
         width: '100%'
     },
     image: {
@@ -18,12 +18,25 @@ export default StyleSheet.create({
         height: '100%'
     },
     imageText: { 
-        color: 'white', 
+        color: 'white',
+        fontSize: 20,
         fontWeight: 'bold',
         position: 'absolute',
-        top: '46%',
+        top: '50%',
         textAlign: 'center',
         left: 0,
         right: 0,
+    },
+    titleContainer: {
+        flex: 1
+    },
+    imageContainer: {
+        flex: 4
+    },
+    buttonContainer: {
+        flex:1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 20
     }
 })

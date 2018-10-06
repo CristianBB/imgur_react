@@ -38,7 +38,7 @@ class Images extends Component {
 
         return (
             <View style={styles.container}>
-                <FlatList
+                <FlatList style={styles.flatListContainer}
                     data={list}
                     renderItem={({ item, index}) => this._renderItem(item, index) }
                     keyExtractor={(item, i) => 'image' + item.id}
@@ -46,7 +46,7 @@ class Images extends Component {
                 />
                 <ActionButton
                     buttonColor={colors.floatingButton}
-                    onPress={() => Actions.newImage()}
+                    onPress={() => Actions.newImage({title: 'Nueva Imagen'})}
                 />
 
                 { this._renderActivityIndicator() }

@@ -4,6 +4,10 @@ import * as colors from '../../../commons/colors'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.mainBackground
+        backgroundColor: colors.mainBackground,
+        padding: 10,
+    },
+    flatListContainer: {
+        borderRadius: 20,
     }
 })
