@@ -1,4 +1,6 @@
 import * as types from './types'
+import {Actions} from "react-native-router-flux";
+import {fetchAlbums} from "../albums/actions";
 
 function setFetching(value) {
     return {
@@ -41,8 +43,24 @@ export function fetchAlbumImages() {
     }
 }
 
-export function postAlbumImage(data) {
+export function createImage(data) {
     return (dispatch, getState, api) => {
+        const album = getState().albums.item;
+
+        if (!album) return;
+
+        dispatch(setFetching(true));
+
+        api.postImage(data.image, album.id, null, data.title, data.description)
+            .then(res => {
+                dispatch(setFetching(false));
+                dispatch(fetchAlbumImages());
+                Actions.popTo('images');
+            })
+            .catch(err => {
+                dispatch(setFetching(false));
+                console.log("createImage error: ", err)
+            })
 
     }
 }

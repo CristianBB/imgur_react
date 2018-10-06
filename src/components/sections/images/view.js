@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as ImagesActions from '../../../redux/images/actions'
 import { ImageCell } from '../../widgets/'
 import { Actions } from 'react-native-router-flux'
+import ActionButton from "react-native-action-button";
 
 class Images extends Component {
 
@@ -29,6 +30,10 @@ class Images extends Component {
                     renderItem={({ item, index}) => this._renderItem(item, index) }
                     keyExtractor={(item, i) => 'image' + item.id}
                     refreshing={this.props.isFetching}
+                />
+                <ActionButton
+                    buttonColor="rgba(231,76,60,1)"
+                    onPress={() => Actions.newImage()}
                 />
             </View>
         )

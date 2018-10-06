@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StatusBar, TouchableOpacity, Text } from 'react-native';
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
-import {Albums, Images, ImageDetail, EditAlbum} from "./sections/";
+import {Albums, Images, ImageDetail, EditAlbum, NewImage} from "./sections/";
 import * as api from '../api/'
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -60,6 +60,11 @@ export default class App extends Component<Props> {
                         <Scene
                             key="editAlbum"
                             component={EditAlbum}
+                            {...sceneDefaultStyles}
+                        />
+                        <Scene
+                            key="newImage"
+                            component={NewImage}
                             {...sceneDefaultStyles}
                         />
                     </Stack>
