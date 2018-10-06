@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Image, Alert } from 'react-native'
+import {View, Text, TouchableOpacity, Image, Alert, ActivityIndicator, Animated} from 'react-native'
 import { Button, TextInput } from '../../widgets/'
 import styles from './styles'
 import ImagePicker from 'react-native-image-picker'
@@ -17,12 +17,14 @@ class EditAlbum extends Component {
                 deleteDialogVisible: false,
                 title: props.album.title,
                 image: { preview: {uri: props.album.cover_link }},
+                animatedOpacity: new Animated.Value(1),
             }
         } else {
             this.state = {
                 deleteDialogVisible: false,
                 title: '',
                 image: null,
+                animatedOpacity: new Animated.Value(1),
             }
         }
 
@@ -35,6 +37,16 @@ class EditAlbum extends Component {
                 path: 'images'
             }
         };
+    }
+
+    _editAlbumAnimation() {
+        Animated.timing(
+            this.state.animatedOpacity,
+            {
+                toValue: 0.2,
+                duration: 1000,
+            }
+        ).start();
     }
 
     _validateForm() {
@@ -61,6 +73,7 @@ class EditAlbum extends Component {
                 };
                 this.props.onNewAlbum(data);
             }
+            this._editAlbumAnimation();
         } else {
             Alert.alert('Atención', 'Complete todos los campos')
         }
@@ -110,7 +123,6 @@ class EditAlbum extends Component {
                 <Button
                     label={'Eliminar'.toUpperCase()}
                     onPress={() => this._showDeleteDialog()}
-                    isFetching={this.props.isFetching}
                 />
             </View>
         )
@@ -122,6 +134,7 @@ class EditAlbum extends Component {
 
     _deleteDialogConfirm = () => {
         this.props.onDeleteAlbum();
+        this._editAlbumAnimation();
         this.setState({ deleteDialogVisible: false });
     };
 
@@ -129,9 +142,20 @@ class EditAlbum extends Component {
         this.setState({ deleteDialogVisible: false });
     };
 
+    _renderActivityIndicator() {
+        if(!this.props.isFetching) {
+            return null
+        }
+        return (
+            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
+                <ActivityIndicator size={'large'} color={'white'} animating={true} />
+            </View>
+        )
+    }
+
     render() {
         return (
-            <View style={styles.container}>
+            <Animated.View style={[styles.container, {opacity: this.state.animatedOpacity}]}>
 
                 <View style={{paddingTop: 40, padding: 20}}>
                     { this._renderTextInput('Título del Album: *', 'title', 'My Album') }
@@ -145,11 +169,11 @@ class EditAlbum extends Component {
                     <Button
                         label={'Guardar'.toUpperCase()}
                         onPress={() => this._onSubmit()}
-                        isFetching={this.props.isFetching}
                     />
                 </View>
 
-                {this._renderDeleteImage()}
+                { this._renderDeleteImage() }
+                { this._renderActivityIndicator() }
 
                 <Dialog.Container visible={this.state.deleteDialogVisible}>
                     <Dialog.Title>Eliminar Álbum</Dialog.Title>
@@ -159,7 +183,7 @@ class EditAlbum extends Component {
                     <Dialog.Button label="Cancelar" onPress={this._deleteDialogCancel} />
                     <Dialog.Button label="Eliminar" onPress={this._deleteDialogConfirm} />
                 </Dialog.Container>
-            </View>
+            </Animated.View>
         )
     }
 }

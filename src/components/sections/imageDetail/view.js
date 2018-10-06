@@ -1,5 +1,13 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import {
+    View,
+    Text,
+    Image,
+    Animated,
+    TouchableOpacity,
+    Dimensions,
+    ActivityIndicator
+} from 'react-native'
 import styles from './styles'
 import { connect } from 'react-redux'
 import * as ImagesActions from "../../../redux/images/actions";
@@ -12,7 +20,18 @@ class ImageDetail extends React.Component {
         super(props);
             this.state = {
                 deleteDialogVisible: false,
+                animatedOpacity: new Animated.Value(1),
             }
+    }
+
+    _deleteImageAnimation() {
+        Animated.timing(
+            this.state.animatedOpacity,
+            {
+                toValue: 0.2,
+                duration: 1000,
+            }
+        ).start();
     }
 
     _showDeleteDialog = () => {
@@ -21,6 +40,7 @@ class ImageDetail extends React.Component {
 
     _deleteDialogConfirm = () => {
         this.props.onDeleteImage();
+        this._deleteImageAnimation();
         this.setState({ deleteDialogVisible: false });
     };
 
@@ -34,8 +54,9 @@ class ImageDetail extends React.Component {
         const description = image && image.description ? image.description : '';
 
         return (
-            <View style={styles.container}>
-                <Image source={imageLink} resizeMode={'cover'} style={[styles.image, { height: '50%' }]}/>
+            <Animated.View style={[styles.container, {opacity: this.state.animatedOpacity}]}>
+                <Image source={imageLink} resizeMode={'cover'} style={[styles.image]}/>
+
                 <View style={styles.dataContainer}>
                     <Text style={styles.text}>{'Descripción: '}</Text>
                     <Text style={styles.text}>{description}</Text>
@@ -57,7 +78,7 @@ class ImageDetail extends React.Component {
                     <Dialog.Button label="Cancelar" onPress={this._deleteDialogCancel} />
                     <Dialog.Button label="Eliminar" onPress={this._deleteDialogConfirm} />
                 </Dialog.Container>
-            </View>
+            </Animated.View>
         )
     }
 }

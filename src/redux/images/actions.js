@@ -1,6 +1,6 @@
 import * as types from './types'
+import * as AlbumsActions from '../albums/actions';
 import {Actions} from "react-native-router-flux";
-import {fetchAlbums} from "../albums/actions";
 
 function setFetching(value) {
     return {
@@ -55,6 +55,7 @@ export function createImage(data) {
             .then(res => {
                 dispatch(setFetching(false));
                 dispatch(fetchAlbumImages());
+                dispatch(AlbumsActions.fetchAlbums()); // Por si el album no tenía ninguna Imagen, asi carga una como cover
                 Actions.popTo('images');
             })
             .catch(err => {
@@ -75,6 +76,7 @@ export function deleteImage() {
             .then(res => {
                 dispatch(setFetching(false));
                 dispatch(fetchAlbumImages());
+                dispatch(AlbumsActions.fetchAlbums()); // Por si se elimina la imagen de cover del album
                 Actions.popTo('images');
             })
             .catch(err => {
