@@ -61,6 +61,25 @@ export function createImage(data) {
                 dispatch(setFetching(false));
                 console.log("createImage error: ", err)
             })
+    }
+}
 
+export function deleteImage() {
+    return (dispatch, getState, api) => {
+        const image = getState().images.item;
+
+        if (!image) return;
+
+        dispatch(setFetching(true));
+        api.deleteImage(image.id)
+            .then(res => {
+                dispatch(setFetching(false));
+                dispatch(fetchAlbumImages());
+                Actions.popTo('images');
+            })
+            .catch(err => {
+                dispatch(setFetching(false));
+                console.log("deleteImage error: ", err)
+            })
     }
 }

@@ -5,6 +5,7 @@ import styles from './styles'
 import ImagePicker from 'react-native-image-picker'
 import { connect } from 'react-redux'
 import * as AlbumsActions from '../../../redux/albums/actions'
+import Dialog from "react-native-dialog";
 
 class EditAlbum extends Component {
 
@@ -13,11 +14,13 @@ class EditAlbum extends Component {
 
         if(props.isEdit && props.album) {
             this.state = {
+                deleteDialogVisible: false,
                 title: props.album.title,
                 image: { preview: {uri: props.album.cover_link }},
             }
         } else {
             this.state = {
+                deleteDialogVisible: false,
                 title: '',
                 image: null,
             }
@@ -87,7 +90,7 @@ class EditAlbum extends Component {
     }
 
     _renderImageInput() {
-        const imageUri = this.state.image ? this.state.image.preview : null;
+        const imageUri = this.state.image && this.state.image.preview && this.state.image.preview.uri ? this.state.image.preview : require('../../../resources/placeholder.png');
         const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen *';
         return (
             <View style={{marginTop: 20}}>
@@ -98,6 +101,33 @@ class EditAlbum extends Component {
             </View>
         )
     }
+
+    _renderDeleteImage() {
+        if (!this.props.isEdit) return;
+
+        return (
+            <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
+                <Button
+                    label={'Eliminar'.toUpperCase()}
+                    onPress={() => this._showDeleteDialog()}
+                    isFetching={this.props.isFetching}
+                />
+            </View>
+        )
+    }
+
+    _showDeleteDialog = () => {
+        this.setState({ deleteDialogVisible: true });
+    };
+
+    _deleteDialogConfirm = () => {
+        this.props.onDeleteAlbum();
+        this.setState({ deleteDialogVisible: false });
+    };
+
+    _deleteDialogCancel = () => {
+        this.setState({ deleteDialogVisible: false });
+    };
 
     render() {
         return (
@@ -119,6 +149,16 @@ class EditAlbum extends Component {
                     />
                 </View>
 
+                {this._renderDeleteImage()}
+
+                <Dialog.Container visible={this.state.deleteDialogVisible}>
+                    <Dialog.Title>Eliminar Álbum</Dialog.Title>
+                    <Dialog.Description>
+                        ¿Deseas eliminar el Álbum? Esta acción no puede deshacerse
+                    </Dialog.Description>
+                    <Dialog.Button label="Cancelar" onPress={this._deleteDialogCancel} />
+                    <Dialog.Button label="Eliminar" onPress={this._deleteDialogConfirm} />
+                </Dialog.Container>
             </View>
         )
     }
@@ -138,6 +178,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onEditAlbum: (data) => {
             dispatch(AlbumsActions.updateAlbum(data))
+        },
+        onDeleteAlbum: () => {
+            dispatch(AlbumsActions.deleteAlbum())
         },
     }
 };

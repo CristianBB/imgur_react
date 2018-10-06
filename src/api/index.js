@@ -92,6 +92,11 @@ export function postImage(image, albumHash, name, title, description ) {
     return axios.post(url, data);
 }
 
+export function deleteImage(imageHash) {
+    const url = `/3/image/${imageHash}`;
+    return axios.delete(url);
+}
+
 export function updateAlbum(albumHash, title, description, coverHash) {
     const url = `/3/album/${albumHash}`;
 
@@ -113,4 +118,10 @@ export function createAlbum(title, description, coverHash) {
     };
 
     return axios.post(url, data);
+}
+
+export function deleteAlbum(albumHash) {
+    const url = `/3/album/${albumHash}`;
+
+    return axios.delete(url);
 }

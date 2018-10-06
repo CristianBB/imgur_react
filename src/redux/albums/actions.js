@@ -115,3 +115,24 @@ export function createAlbum(data) {
             })
     }
 }
+
+export function deleteAlbum() {
+    return (dispatch, getState, api) => {
+        const album = getState().albums.item;
+
+        if (!album) return;
+
+        dispatch(setFetching(true));
+
+        api.deleteAlbum(album.id)
+            .then(res => {
+                dispatch(setFetching(false));
+                dispatch(fetchAlbums());
+                Actions.popTo('albums');
+            })
+            .catch(err => {
+                dispatch(setFetching(false));
+                console.log("deleteAlbum error: ", err)
+            })
+    }
+}
