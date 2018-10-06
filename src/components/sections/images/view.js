@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native'
+import {View, FlatList, ActivityIndicator} from 'react-native'
 import styles from './styles'
 import { connect } from 'react-redux'
 import * as ImagesActions from '../../../redux/images/actions'
@@ -20,6 +20,17 @@ class Images extends Component {
         />
     }
 
+    _renderActivityIndicator() {
+        if(!this.props.isFetching) {
+            return null
+        }
+        return (
+            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
+                <ActivityIndicator size={'large'} color={'white'} animating={true} />
+            </View>
+        )
+    }
+
     render() {
         const { list, isFetching } = this.props;
 
@@ -35,6 +46,8 @@ class Images extends Component {
                     buttonColor="rgba(231,76,60,1)"
                     onPress={() => Actions.newImage()}
                 />
+
+                { this._renderActivityIndicator() }
             </View>
         )
     }
