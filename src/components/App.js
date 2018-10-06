@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity, Text } from 'react-native';
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
-import {Albums, Images, ImageDetail} from "./sections/";
+import {Albums, Images, ImageDetail, EditAlbum} from "./sections/";
 import * as api from '../api/'
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -22,7 +22,12 @@ const sceneDefaultStyles = {
     titleStyle: { color: 'white' },
 };
 
-type Props = {};
+const editAlbumButton = props => (
+    <TouchableOpacity style={{padding: 10}} onPress={ () => Actions.editAlbum({isEdit: true}) }>
+        <Text style={{color: 'red', fontWeight: 'bold'}}>{'Editar'}</Text>
+    </TouchableOpacity>
+);
+
 export default class App extends Component<Props> {
 
     componentWillMount() {
@@ -44,12 +49,17 @@ export default class App extends Component<Props> {
                         <Scene
                             key="images"
                             component={Images}
-                            // renderRightButton={RightButton}
+                            renderRightButton={editAlbumButton()}
                             {...sceneDefaultStyles}
                         />
                         <Scene
                             key="imageDetail"
                             component={ImageDetail}
+                            {...sceneDefaultStyles}
+                        />
+                        <Scene
+                            key="editAlbum"
+                            component={EditAlbum}
                             {...sceneDefaultStyles}
                         />
                     </Stack>

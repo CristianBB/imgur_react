@@ -1,5 +1,6 @@
 import * as types from './types'
 import { AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 function setFetching(value) {
     return {
@@ -67,10 +68,29 @@ export function fetchAlbums() {
                 console.log(albumsList);
             })
             .catch( err => {
-                if (err.response && status )
                 dispatch(setFetching(false));
                 console.log("fetchAlbums error: ", err)
             })
+    }
+}
 
+export function updateAlbum(data) {
+    return (dispatch, getState, api) => {
+
+        dispatch(setFetching(true));
+
+        api.postImage(data.image, data.id, 'cover_image.png', 'Cover Image', null)
+            .then(res => {
+                return api.updateAlbum(data.id, data.title, data.description, res ? res.data.data.id : null);
+            })
+            .then(res => {
+                dispatch(setFetching(false));
+                dispatch(fetchAlbums());
+                Actions.popTo('albums');
+            })
+            .catch( err => {
+                dispatch(setFetching(false));
+                console.log("updateAlbum error: ", err)
+            })
     }
 }

@@ -38,8 +38,9 @@ export function fetchAlbums() {
                 }
             })
             .then(res => {
-                if (res.data) {
+                if (res) {
                     username = res.data.account_username;
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
 
                     let promises = [];
                     promises.push(AsyncStorage.setItem('access_token', res.data.access_token));
@@ -73,4 +74,31 @@ export function fetchAlbumImages(albumHash) {
 export function getImage(imageHash) {
     const url = `/3/image/${imageHash}`;
     return axios.get(url);
+}
+
+export function postImage(image, albumHash, name, title, description ) {
+    const url = '/3/image';
+    const data = {};
+
+    if (!image) {
+        return Promise.resolve()
+    }
+
+    data.image = image;
+    data.album = albumHash;
+    if (title) data.title = title;
+    if (description) data.description = description;
+
+    return axios.post(url, data);
+}
+
+export function updateAlbum(albumHash, title, description, coverHash) {
+    const url = `3/album/${albumHash}`;
+
+    const data = {};
+    if (title) data.title = title;
+    if (description) data.description = description;
+    if (coverHash) data.cover = coverHash;
+
+    return axios.put(url, data);
 }
