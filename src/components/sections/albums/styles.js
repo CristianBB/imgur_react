@@ -7,7 +7,6 @@ export default StyleSheet.create({
         backgroundColor: colors.mainBackground,
     },
     flatListContainer: {
-        paddingTop: 40,
         borderRadius: 20,
     },
     noAlbumContainer: {

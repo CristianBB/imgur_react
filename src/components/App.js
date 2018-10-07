@@ -43,8 +43,9 @@ export default class App extends Component<Props> {
                     <Stack key="root">
                         <Scene
                             key="albums"
+                            title="Mis Albums"
                             component={Albums}
-                            hideNavBar={true}
+                            {...sceneDefaultStyles}
                             initial={true}
                         />
                         <Scene

@@ -63,9 +63,6 @@ export function fetchAlbums() {
                 dispatch(setFetching(false));
                 dispatch(setList(albumsList));
                 AsyncStorage.setItem('albumsList', JSON.stringify(albumsList));
-
-                //TODO eliminar
-                console.log(albumsList);
             })
             .catch( err => {
                 dispatch(setFetching(false));

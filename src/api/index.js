@@ -14,8 +14,8 @@ export function configureAxios() {
     axios.defaults.baseURL = BASE_URL;
     axios.defaults.headers.common['Authorization'] = `Client-ID ${CLIENT_ID}`;
 
-    // TODO para pruebas, eliminar
-    AsyncStorage.clear();
+    // Eliminamos access_token para forzar su renovación en el primer fetchAlbums
+    AsyncStorage.removeItem('access_token');
 }
 
 function _getAccessToken() {
@@ -28,9 +28,11 @@ export function fetchAlbums() {
     let username;
 
     return new Promise((resolve, reject) => {
-        AsyncStorage.getItem('account_username')
-            .then(accountUsername => {
-                if (accountUsername) {
+        AsyncStorage.multiGet(['account_username', 'access_token'])
+            .then(results => {
+                let accountUsername = results[0][1];
+                let accessToken = results[1][1];
+                if (accountUsername && accessToken) {
                     username = accountUsername;
                     return Promise.resolve();
                 } else {
